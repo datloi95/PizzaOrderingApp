@@ -1,0 +1,8 @@
+*.dll
+*.json
+*.config
+*.user
+.vs/RESTAPI
+bin
+obj
+Migrations
