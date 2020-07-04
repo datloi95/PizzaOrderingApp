@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RESTAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RESTAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OrderItemsController : ControllerBase
@@ -24,6 +26,7 @@ namespace RESTAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderItem>>> GetOrderItems()
         {
+            var name = User.Identity.Name;
             return await _context.OrderItems.ToListAsync();
         }
 
@@ -32,7 +35,6 @@ namespace RESTAPI.Controllers
         public async Task<ActionResult<OrderItem>> GetOrderItem(long id)
         {
             var orderItem = await _context.OrderItems.FindAsync(id);
-
             if (orderItem == null)
             {
                 return NotFound();
