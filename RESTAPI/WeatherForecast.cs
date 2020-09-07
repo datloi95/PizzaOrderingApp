@@ -1,6 +1,6 @@
 using System;
 
-namespace RESTAPI
+namespace rest_api
 {
     public class WeatherForecast
     {

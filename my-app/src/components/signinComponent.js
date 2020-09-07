@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Modal, Button, Form } from "react-bootstrap";
 import { UserContext } from "../App";
+import jwt_decode  from 'jwt-decode'
 import axios from 'axios';
 
 const SignIn = () => {
@@ -16,12 +17,15 @@ const SignIn = () => {
 
     const signIn = async () => {
         const result = await axios.post(
-            'http://127.0.0.1:8000/api/token/', {username, password}
+            'http://localhost:5000/api/auth/login', {username, password}
           );
+        
+        const token = result.data.data;
+        const decoded = jwt_decode(token);
 
         dispatch({
             type: "LOGIN",
-            payload: result.data
+            payload: { token, username: decoded.unique_name }   
         })
     };
 

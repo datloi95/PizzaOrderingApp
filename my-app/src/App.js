@@ -13,7 +13,6 @@ const initialState = {
     isAuthenticated: false,
     username: null,
     access: null,
-    refresh: null,
     menu: null
 };
 
@@ -24,8 +23,7 @@ const reducer = (state, action) => {
                 ...state,
                 isAuthenticated: true,
                 username: action.payload.username,
-                access: action.payload.access,
-                refresh: action.payload.refresh,
+                token: action.payload.token,
             };
         case "LOGOUT":
             return {
@@ -33,7 +31,6 @@ const reducer = (state, action) => {
                 isAuthenticated: false,
                 username: null,
                 access: null,
-                refresh: null
             };
         case "GET_MENU":
             return {
